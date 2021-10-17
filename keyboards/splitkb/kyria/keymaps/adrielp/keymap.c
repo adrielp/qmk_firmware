@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+-----+------+------+------+------|                              |------+------+------+------+------+--------|
  * |LSFT     |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J |   K  |   L  | ;  : |RSFT/\| |
  * |---------+-----+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |LCtrl/ESC|   Z  |   X  |   C  |   V  |   B  | [ {  | `~  |  | RGUI  |  ] } |   N  |   M | ,  < | . >  | /  ? |RCTL/'" |
+ * |LCtrl/ESC|   Z  |   X  |   C  |   V  |   B  | [ {  | `~  |  | CAPS  |  ] } |   N  |   M | ,  < | . >  | /  ? |RCTL/'" |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |LAlt  | DEL  | LGUI |Space |NAV/  |  |NAV/  |Space |RSFTt | +=   | -_   |
  *                        |      |      |      |      |ENT   |  |ENT   |      |      |      |      |
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MAIN] = LAYOUT(
      KC_TAB,   KC_Q,    KC_W,   KC_E,    KC_R,    KC_T,                                                 KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , KC_BSPC ,
      KC_LSFT,  KC_A,    KC_S,   KC_D,    KC_F,    KC_G,                                            KC_H,   KC_J ,  KC_K ,   KC_L , KC_SCOLON, SHFT_BK ,
-     CTL_ESC, KC_Z,    KC_X,   KC_C,    KC_V,    KC_B, KC_LBRC , KC_GRAVE,       KC_RGUI, KC_RBRC, KC_N,   KC_M , KC_COMM, KC_DOT , KC_SLSH , CTL_QUOT ,
+     CTL_ESC, KC_Z,    KC_X,   KC_C,    KC_V,    KC_B, KC_LBRC , KC_GRAVE,       KC_CAPS, KC_RBRC, KC_N,   KC_M , KC_COMM, KC_DOT , KC_SLSH , CTL_QUOT ,
                KC_LALT, KC_DEL, KC_LGUI, KC_SPC , LT(NAV, KC_ENTER),                     LT(NAV, KC_ENTER) , KC_SPC , KC_RSFT, KC_EQL, KC_MINS
     ),
 
@@ -75,9 +75,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |        |  GUI |  Alt | Ctrl | Shift|      |                              |  ←   |  ↓   |   ↑  |   →  | VolDn| Insert |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |ScLck |  |      |      | Pause|M Prev|M Play|M Next|VolMut| PrtSc  |
+ * |        |  F1  |  F2  |  F3  |  F4  |  F5  |      |ScLck |  |      |      | Pause|M Prev|M Play|M Next|VolMut| PrtSc  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      | PgDN | PgUp |      |      |
+ *                        |      |      |      |      |      |  |      |      |      | PGDN | PGUP |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -117,9 +117,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
-//oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-//	return OLED_ROTATION_180;
-//}
 
 static void render_status(void) {
     // Host Keyboard Layer Status
@@ -134,25 +131,6 @@ static void render_status(void) {
         default:
             oled_write_P(PSTR("Undefined\n"), false);
     }
-//    switch (get_highest_layer(layer_state)) {
-//        case _QWERTY:
-//            oled_write_P(PSTR("QWERTY"), false);
-//            break;
-//        case _2WERTY:
-//            oled_write_P(PSTR("2WERTY"), false);
-//            break;
-//        case _LOWER:
-//            oled_write_P(PSTR("Numpad"), false);
-//            break;
-//        case _RAISE:
-//            oled_write_P(PSTR("F Keys"), false);
-//            break;
-//        case _ADJUST:
-//            oled_write_P(PSTR("RGB   "), false);
-//            break;
-//        default:
-//            oled_write_P(PSTR("Undefined"), false);
-//    }
 
     //Host Keyboard LED Status
     led_t led_state = host_keyboard_led_state();
@@ -162,14 +140,14 @@ static void render_status(void) {
 }
 
 #define IDLE_FRAMES 5
-#define IDLE_SPEED 40 // below this wpm value your animation will idle
+#define IDLE_SPEED 60 // below this wpm value your animation will idle
 
 // #define PREP_FRAMES 1 // uncomment if >1
 
 #define TAP_FRAMES 2
-#define TAP_SPEED 60 // above this wpm value typing animation to triggere
+#define TAP_SPEED 20 // above this wpm value typing animation to triggere
 
-#define ANIM_FRAME_DURATION 200 // how long each frame lasts in ms
+#define ANIM_FRAME_DURATION 100 // how long each frame lasts in ms
 // #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
 #define ANIM_SIZE 636 // number of bytes in array, minimize for adequate firmware size, max is 1024
 
