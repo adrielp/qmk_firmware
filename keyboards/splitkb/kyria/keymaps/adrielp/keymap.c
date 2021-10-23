@@ -140,14 +140,14 @@ static void render_status(void) {
 }
 
 #define IDLE_FRAMES 5
-#define IDLE_SPEED 60 // below this wpm value your animation will idle
+#define IDLE_SPEED 70 // below this wpm value your animation will idle
 
 // #define PREP_FRAMES 1 // uncomment if >1
 
 #define TAP_FRAMES 2
-#define TAP_SPEED 20 // above this wpm value typing animation to triggere
+#define TAP_SPEED 70 // above this wpm value typing animation to triggere
 
-#define ANIM_FRAME_DURATION 100 // how long each frame lasts in ms
+#define ANIM_FRAME_DURATION 150 // how long each frame lasts in ms
 // #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
 #define ANIM_SIZE 636 // number of bytes in array, minimize for adequate firmware size, max is 1024
 
